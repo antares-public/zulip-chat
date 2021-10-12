@@ -19,7 +19,9 @@ export const App = () => {
 
   const handleSubmit = async () => {
     const z = await zulip(login);
-    console.log(z);
+    if (z.config.username && z.config.apiKey) {
+      console.log(z.config.username,  z.config.apiKey);
+    }
   };
 
   const handleChange = (e, { name, value }) => {
