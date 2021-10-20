@@ -20,11 +20,11 @@ export const App = () => {
   const handleSubmit = async () => {
     const z = await zulip(login);
     if (z.config.username && z.config.apiKey) {
-      console.log(z.config.username,  z.config.apiKey);
+      console.log(z.config.username, z.config.apiKey);
     }
   };
 
-  const handleChange = (e, { name, value }) => {
+  const handleChange = (e: any, { name, value }: any) => {
     setLogin((prevState) => ({ ...prevState, [name]: value }));
   };
 
