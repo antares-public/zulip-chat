@@ -10,23 +10,31 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-import zulip from "zulip-js";
+import zulipInit from "zulip-js";
 
 const config = {
   username: process.env.REACT_APP_EMAIL,
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: process.env.REACT_APP_KEY,
   realm: process.env.REACT_APP_REALM,
 };
 
 export const Register = () => {
   const [login, setLogin] = useState({
-    realm: process.env.REACT_APP_REALM,
-    username: "test@mail.ru",
-    password: "test123",
+    email: "rainbwodeity69@icloud.ru",
+    password: "temp",
+    full_name: "New User",
+    short_name: "newbie",
   });
 
   const handleSignIn = async () => {
-    const client = await zulip(config);
+    const client = await zulipInit(config);
+    // Register a queue
+    const params = {
+      event_types: ["message"],
+    };
+
+    console.log(await client.queues.register(params));
+    console.log(await client.users.me.getProfile());
     console.log(await client.users.create(login));
   };
 
@@ -48,7 +56,7 @@ export const Register = () => {
               iconPosition="left"
               placeholder="Realm"
               name="realm"
-              value={login.realm}
+              value={login.full_name}
               onChange={handleChange}
             />
             <Form.Input
@@ -57,7 +65,7 @@ export const Register = () => {
               iconPosition="left"
               placeholder="E-mail address"
               name="email"
-              value={login.username}
+              value={login.email}
               onChange={handleChange}
             />
             <Form.Input
