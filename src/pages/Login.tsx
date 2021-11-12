@@ -15,6 +15,7 @@ import zulip from "zulip-js";
 export const Login = () => {
   const [login, setLogin] = useState({
     realm: process.env.REACT_APP_REALM,
+    apiKey: process.env.REACT_APP_KEY,
     username: process.env.REACT_APP_EMAIL,
     password: process.env.REACT_APP_PASSWORD,
   });

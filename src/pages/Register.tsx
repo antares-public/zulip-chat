@@ -20,21 +20,14 @@ const config = {
 
 export const Register = () => {
   const [login, setLogin] = useState({
-    email: "rainbwodeity69@icloud.ru",
-    password: "temp",
+    email: "rainbwodeity12@icloud.ru",
+    password: "newbie123GHJ",
     full_name: "New User",
-    short_name: "newbie",
+    short_name: "temp",
   });
 
   const handleSignIn = async () => {
     const client = await zulipInit(config);
-    // Register a queue
-    const params = {
-      event_types: ["message"],
-    };
-
-    console.log(await client.queues.register(params));
-    console.log(await client.users.me.getProfile());
     console.log(await client.users.create(login));
   };
 
@@ -52,16 +45,25 @@ export const Register = () => {
           <Segment stacked>
             <Form.Input
               fluid
-              icon="clipboard"
               iconPosition="left"
-              placeholder="Realm"
-              name="realm"
+              icon="user"
+              placeholder="Full name"
+              name="full"
               value={login.full_name}
               onChange={handleChange}
             />
             <Form.Input
               fluid
-              icon="user"
+              icon="clipboard"
+              iconPosition="left"
+              placeholder="Short name"
+              name="short"
+              value={login.short_name}
+              onChange={handleChange}
+            />
+            <Form.Input
+              fluid
+              icon="mail"
               iconPosition="left"
               placeholder="E-mail address"
               name="email"
@@ -80,7 +82,7 @@ export const Register = () => {
             />
 
             <Button color="teal" fluid size="large">
-              Login
+              Registration
             </Button>
           </Segment>
         </Form>
