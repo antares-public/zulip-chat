@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import { Grid } from "semantic-ui-react";
+import { Button, Grid, Loader } from "semantic-ui-react";
 import zulipInit from "zulip-js";
 import { IUser } from "../interfaces";
-import { User } from "./User";
-
-const config = {
-  username: process.env.REACT_APP_EMAIL,
-  apiKey: process.env.REACT_APP_KEY,
-  realm: process.env.REACT_APP_REALM,
-};
+import { User } from "../components/User";
+import { Link } from "react-router-dom";
+import { config } from "../constants/config";
 
 const Users = () => {
   const [users, setUsers] = useState<Array<IUser["members"]>>([]);
@@ -21,16 +17,27 @@ const Users = () => {
   useEffect(() => {
     handleFetchUser();
   }, []);
-  console.log(users);
-  return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450, textAlign: "left" }}>
-        <h1 style={{ marginBottom: 10 }}>Users</h1>
-        {users.map((u) => (
-          <User key={u.user_id} user={u} />
-        ))}
+
+  if (!users.length) {
+    return (
+      <Grid.Column
+        style={{ maxWidth: 450, textAlign: "left", margin: "20px 0" }}
+      >
+        <Loader active>Loading</Loader>
       </Grid.Column>
-    </Grid>
+    );
+  }
+
+  return (
+    <Grid.Column style={{ maxWidth: 450, textAlign: "left", margin: "20px 0" }}>
+      <h1>Users</h1>
+      {users.map((u) => (
+        <User key={u.user_id} user={u} />
+      ))}
+      <Link to="home">
+        <Button content="Home" secondary />
+      </Link>
+    </Grid.Column>
   );
 };
 

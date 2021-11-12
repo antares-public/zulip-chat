@@ -32,7 +32,6 @@ export const Login = () => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
           <Image src="/logo.png" /> Sign In to your account
@@ -76,7 +75,7 @@ export const Login = () => {
         <Message>
           New to us? <Link to="/register">Sign Up</Link>
         </Message>
+        <Link to="home"><Button content='Home' secondary /></Link>
       </Grid.Column>
-    </Grid>
   );
 };

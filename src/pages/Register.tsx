@@ -11,12 +11,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import zulipInit from "zulip-js";
-
-const config = {
-  username: process.env.REACT_APP_EMAIL,
-  apiKey: process.env.REACT_APP_KEY,
-  realm: process.env.REACT_APP_REALM,
-};
+import { config } from "../constants/config";
 
 export const Register = () => {
   const [login, setLogin] = useState({
@@ -36,7 +31,6 @@ export const Register = () => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
           <Image src="/logo.png" /> Sign Up to your account
@@ -89,7 +83,7 @@ export const Register = () => {
         <Message>
           Already have an account? <Link to="/login">Sign In</Link>
         </Message>
+        <Link to="home"><Button content='Home' secondary /></Link>
       </Grid.Column>
-    </Grid>
   );
 };
