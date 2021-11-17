@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Grid, Item } from "semantic-ui-react";
 import { homeConfig } from "../constants/home";
@@ -19,7 +20,12 @@ export const Home = () => {
           </Item>
         ))}
       </Item.Group>
-      <h5>Github: <a href="https://github.com/antaresofficial/zulip-chat">https://github.com/antaresofficial/zulip-chat</a></h5>
+      <h5>
+        Github:{" "}
+        <a href="https://github.com/antaresofficial/zulip-chat">
+          https://github.com/antaresofficial/zulip-chat
+        </a>
+      </h5>
     </Grid.Column>
   );
 };

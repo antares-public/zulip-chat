@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Grid, Loader } from "semantic-ui-react";
-import zulipInit from "zulip-js";
+import { Button, Grid } from "semantic-ui-react";
 import { IUser } from "../interfaces";
-import { User } from "../components/User";
+import { UserItem } from "../components/UserItem";
 import { Link } from "react-router-dom";
 import { config } from "../constants/config";
+import { Loading } from "../components/Loading";
+import zulipInit from "zulip-js";
 
 const Users = () => {
   const [users, setUsers] = useState<Array<IUser["members"]>>([]);
@@ -18,21 +19,13 @@ const Users = () => {
     handleFetchUser();
   }, []);
 
-  if (!users.length) {
-    return (
-      <Grid.Column
-        style={{ maxWidth: 450, textAlign: "left", margin: "20px 0" }}
-      >
-        <Loader active>Loading</Loader>
-      </Grid.Column>
-    );
-  }
+  if (!users.length) <Loading />;
 
   return (
     <Grid.Column style={{ maxWidth: 450, textAlign: "left", margin: "20px 0" }}>
       <h1>Users</h1>
       {users.map((u) => (
-        <User key={u.user_id} user={u} />
+        <UserItem key={u.user_id} user={u} />
       ))}
       <Link to="home">
         <Button content="Home" secondary />

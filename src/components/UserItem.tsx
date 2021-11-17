@@ -2,7 +2,7 @@ import React from "react";
 import { List, Image } from "semantic-ui-react";
 import { IUser } from "../interfaces";
 
-export const User: React.FC<{ user: IUser }> = ({ user }) => (
+export const UserItem: React.FC<{ user: IUser }> = ({ user }) => (
   <List>
     <List.Item>
       <Image avatar src={user.avatar_url} />

@@ -2,7 +2,7 @@ import React from "react";
 import { Comment } from "semantic-ui-react";
 import { IMessageZulip } from "../interfaces";
 
-export const Message: React.FC<{
+export const MessageItem: React.FC<{
   message: IMessageZulip;
   side: "right" | "left";
 }> = ({ message, side }) => {

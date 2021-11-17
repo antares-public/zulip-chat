@@ -19,4 +19,9 @@ export const homeConfig = [
     name: "login",
     desc: "on this page you will receive a login :)",
   },
+  {
+    img: "https://i.imgur.com/aHg9DzD.png1",
+    name: "group",
+    desc: "group correspondence",
+  },
 ];

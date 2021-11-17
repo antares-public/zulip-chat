@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Comment, Form, Grid, Loader } from "semantic-ui-react";
-import { Message } from "../components/Message";
-import zulipInit from "zulip-js";
+import { Button, Comment, Form, Grid } from "semantic-ui-react";
+import { MessageItem } from "../components/MessageItem";
 import { IMessageZulip } from "../interfaces";
 import { Link } from "react-router-dom";
 import { config } from "../constants/config";
+import { Loading } from "../components/Loading";
+import zulipInit from "zulip-js";
 
 export const Chat = () => {
   const [messages, setMessages] = useState<Array<IMessageZulip>>([]);
@@ -41,21 +42,14 @@ export const Chat = () => {
     hadlerFetchMessages();
   }, [handleSend]);
 
-  if (!messages.length) {
-    return (
-      <Grid.Column
-        style={{ maxWidth: 450, textAlign: "left", margin: "20px 0" }}
-      >
-        <Loader active>Loading</Loader>
-      </Grid.Column>
-    );
-  }
+  if (!messages.length) <Loading />;
+
   return (
     <Grid.Column style={{ maxWidth: 600, margin: "20px 0" }}>
       <Comment.Group>
         <h1>Chat</h1>
         {messages.map((m: IMessageZulip) => (
-          <Message
+          <MessageItem
             key={m.id}
             message={m}
             side={
@@ -78,7 +72,7 @@ export const Chat = () => {
             icon="edit"
             primary
           />
-          <Link to="home">
+          <Link to="/home">
             <Button content="Home" secondary />
           </Link>
         </Form>

@@ -3,8 +3,10 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { Chat } from "./pages/Chat";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
+import { Streams } from "./pages/Stream/Streams";
 import { Register } from "./pages/Register";
 import Users from "./pages/Users";
+import { StreamContainer } from "./pages/Stream/StreamContainer";
 
 export const useRoutes = () => {
   return (
@@ -20,6 +22,12 @@ export const useRoutes = () => {
       </Route>
       <Route path="/users" exact>
         <Users />
+      </Route>
+      <Route path="/group" exact>
+        <Streams />
+      </Route>
+      <Route path="/stream:id">
+        <StreamContainer />
       </Route>
       <Route path="/home" exact>
         <Home />
