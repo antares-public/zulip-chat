@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Comment, Grid } from "semantic-ui-react";
@@ -9,15 +10,24 @@ import { IStream } from "../../interfaces";
 
 export const Streams = () => {
   const [streams, setStreams] = useState<Array<IStream>>([]);
+
   const hadlerFetchStreams = async () => {
     const client = await zulipInit(config);
     const data = await client.streams.retrieve();
     setStreams(data.streams);
   };
 
+  const handleCreate = async () => {
+    const client = await zulipInit(config);
+    const meParams = {
+      subscriptions: JSON.stringify([{ name: "A Project 2" }]),
+    };
+    await client.users.me.subscriptions.add(meParams);
+  };
+
   useEffect(() => {
     hadlerFetchStreams();
-  }, []);
+  }, [handleCreate]);
 
   if (!streams.length) {
     return <Loading />;
@@ -33,6 +43,13 @@ export const Streams = () => {
         <Link to="home">
           <Button content="Home" secondary />
         </Link>
+        <Button
+          content="Create"
+          onClick={handleCreate}
+          labelPosition="right"
+          icon="edit"
+          primary
+        />
       </Comment.Group>
     </Grid.Column>
   );

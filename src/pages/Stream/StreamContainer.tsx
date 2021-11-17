@@ -24,14 +24,5 @@ export const StreamContainer = () => {
     return <Loading />;
   }
 
-  return (
-    <Stream
-      stream={stream}
-      id={id}
-      // handleSend={handleSend}
-      // setMessage={setMessage}
-      // messages={messages}
-      // message={message}
-    />
-  );
+  return <Stream stream={stream} id={id} />;
 };
