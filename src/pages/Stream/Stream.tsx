@@ -12,28 +12,36 @@ export const Stream: React.FC<any> = ({ stream, id }) => {
   const [messages, setMessages] = useState<IStream>([]);
 
   const hadlerFetchMessages = useCallback(async () => {
-    const client = await zulipInit(config);
+    try {
+      const client = await zulipInit(config);
 
-    const readParams = {
-      anchor: "newest",
-      num_before: 5,
-      num_after: 0,
-      narrow: [{ operator: "stream", operand: stream.name }],
-    };
-    const { messages } = await client.messages.retrieve(readParams);
-    setMessages(messages);
+      const readParams = {
+        anchor: "newest",
+        num_before: 5,
+        num_after: 0,
+        narrow: [{ operator: "stream", operand: stream.name }],
+      };
+      const { messages } = await client.messages.retrieve(readParams);
+      setMessages(messages);
+    } catch (e) {
+      return e;
+    }
   }, [stream.name]);
 
   const handleSend = async () => {
-    const client = await zulipInit(config);
-    const params = {
-      to: stream.name,
-      type: "stream",
-      topic: "Castle",
-      content: message,
-    };
-    await client.messages.send(params);
-    setMessage("");
+    try {
+      const client = await zulipInit(config);
+      const params = {
+        to: stream.name,
+        type: "stream",
+        topic: "Castle",
+        content: message,
+      };
+      await client.messages.send(params);
+      setMessage("");
+    } catch (e) {
+      return e;
+    }
   };
 
   useEffect(() => {

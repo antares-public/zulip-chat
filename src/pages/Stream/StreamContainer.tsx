@@ -11,9 +11,13 @@ export const StreamContainer = () => {
   const { id } = useParams<{ id: string }>();
 
   const handleGetStream = useCallback(async () => {
-    const client = await zulipInit(config);
-    const { streams } = await client.streams.retrieve();
-    setStream(streams.find((d: IStream) => Number(id) === d.stream_id));
+    try {
+      const client = await zulipInit(config);
+      const { streams } = await client.streams.retrieve();
+      setStream(streams.find((d: IStream) => Number(id) === d.stream_id));
+    } catch (e) {
+      return e;
+    }
   }, [id]);
 
   useEffect(() => {

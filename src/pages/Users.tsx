@@ -10,9 +10,13 @@ import zulipInit from "zulip-js";
 const Users = () => {
   const [users, setUsers] = useState<Array<IUser["members"]>>([]);
   const handleFetchUser = async () => {
-    const client = await zulipInit(config);
-    const allUsers = await client.users.retrieve();
-    setUsers(allUsers.members.filter((u: IUser) => u.is_active));
+    try {
+      const client = await zulipInit(config);
+      const allUsers = await client.users.retrieve();
+      setUsers(allUsers.members.filter((u: IUser) => u.is_active));
+    } catch (e) {
+      return e;
+    }
   };
 
   useEffect(() => {

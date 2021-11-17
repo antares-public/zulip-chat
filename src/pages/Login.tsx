@@ -20,9 +20,13 @@ export const Login = () => {
   });
 
   const handleSignIn = async () => {
-    const z = await zulip(login);
-    if (z.config.username && z.config.apiKey) {
-      console.log(z.config.username, z.config.apiKey);
+    try {
+      const client = await zulip(login);
+      if (client.config.username && client.config.apiKey) {
+        console.log(client.config.username, client.config.apiKey);
+      }
+    } catch (e) {
+      return e;
     }
   };
 

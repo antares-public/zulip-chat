@@ -12,17 +12,25 @@ export const Streams = () => {
   const [streams, setStreams] = useState<Array<IStream>>([]);
 
   const hadlerFetchStreams = async () => {
-    const client = await zulipInit(config);
-    const data = await client.streams.retrieve();
-    setStreams(data.streams);
+    try {
+      const client = await zulipInit(config);
+      const data = await client.streams.retrieve();
+      setStreams(data.streams);
+    } catch (e) {
+      return e;
+    }
   };
 
   const handleCreate = async () => {
-    const client = await zulipInit(config);
-    const meParams = {
-      subscriptions: JSON.stringify([{ name: "A Project 2" }]),
-    };
-    await client.users.me.subscriptions.add(meParams);
+    try {
+      const client = await zulipInit(config);
+      const meParams = {
+        subscriptions: JSON.stringify([{ name: "A Project 2" }]),
+      };
+      await client.users.me.subscriptions.add(meParams);
+    } catch (e) {
+      return e;
+    }
   };
 
   useEffect(() => {

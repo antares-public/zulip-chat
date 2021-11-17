@@ -13,29 +13,37 @@ export const Chat = () => {
 
   // getting a list of active users
   const hadlerFetchMessages = async () => {
-    const client = await zulipInit(config);
+    try {
+      const client = await zulipInit(config);
 
-    const readParams = {
-      anchor: "newest",
-      num_before: 5,
-      num_after: 0,
-      narrow: [{ operator: "pm-with", operand: [8, 21] }],
-    };
+      const readParams = {
+        anchor: "newest",
+        num_before: 5,
+        num_after: 0,
+        narrow: [{ operator: "pm-with", operand: [8, 21] }],
+      };
 
-    const data = await client.messages.retrieve(readParams);
-    setMessages(data.messages);
+      const data = await client.messages.retrieve(readParams);
+      setMessages(data.messages);
+    } catch (e) {
+      return e;
+    }
   };
 
   // sending a message
   const handleSend = useCallback(async () => {
-    const client = await zulipInit(config);
-    const params = {
-      to: [21],
-      type: "private",
-      content: message,
-    };
-    await client.messages.send(params);
-    setMessage("");
+    try {
+      const client = await zulipInit(config);
+      const params = {
+        to: [21],
+        type: "private",
+        content: message,
+      };
+      await client.messages.send(params);
+      setMessage("");
+    } catch (e) {
+      return e;
+    }
   }, [message]);
 
   useEffect(() => {
