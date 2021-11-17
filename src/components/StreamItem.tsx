@@ -7,7 +7,7 @@ export const StreamItem: React.FC<{ stream: IUser }> = ({ stream }) => (
   <List>
     <List.Item style={{ textAlign: "left", margin: 30 }}>
       <List.Header>
-        <Link to={`/stream${stream.stream_id}`}>{stream.name}</Link>
+        <Link to={`/streams${stream.stream_id}`}>{stream.name}</Link>
       </List.Header>
       <List.Description style={{ cursor: "default" }}>
         {stream.description}

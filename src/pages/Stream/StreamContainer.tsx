@@ -23,7 +23,7 @@ export const StreamContainer = () => {
     const { streams } = await client.streams.retrieve();
     const { messages } = await client.messages.retrieve(readParams);
     setMessages(messages);
-    setStream(streams.find((d: IStream) => Number(id) === d.stream_id));
+    setStream(streams.find((d: IStream) => Number(id) === d.stream_id) || null);
   }, [id]);
 
   const handleSend = useCallback(async () => {
@@ -36,17 +36,13 @@ export const StreamContainer = () => {
     };
     await client.messages.send(params);
     setMessage("");
-  }, [message, stream]);
+  }, [message, stream?.name]);
 
   useEffect(() => {
     hadlerFetchMessages();
   }, [hadlerFetchMessages, handleSend]);
 
   if (!stream) {
-    return <h1>Not found</h1>;
-  }
-
-  if (!messages) {
     return <Loading />;
   }
 

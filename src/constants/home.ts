@@ -20,8 +20,8 @@ export const homeConfig = [
     desc: "on this page you will receive a login :)",
   },
   {
-    img: "https://i.imgur.com/aHg9DzD.png1",
-    name: "group",
+    img: "https://i.imgur.com/ZmnRthz.png",
+    name: "streams",
     desc: "group correspondence",
   },
 ];

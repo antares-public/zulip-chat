@@ -38,7 +38,10 @@ export const Stream: React.FC<any> = ({
             icon="edit"
             primary
           />
-          <Link to="home">
+          <Link to="/streams">
+            <Button content="Back" primary />
+          </Link>
+          <Link to="/home">
             <Button content="Home" secondary />
           </Link>
         </Form>

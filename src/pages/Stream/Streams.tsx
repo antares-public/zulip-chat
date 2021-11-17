@@ -19,12 +19,14 @@ export const Streams = () => {
     hadlerFetchStreams();
   }, []);
 
-  if (!streams.length) <Loading />;
+  if (!streams.length) {
+    return <Loading />;
+  }
 
   return (
     <Grid.Column style={{ maxWidth: 450, margin: "20px 0" }}>
       <Comment.Group>
-        <h1>Group</h1>
+        <h1>Streams</h1>
         {streams.map((s: IStream) => (
           <StreamItem key={s.stream_id} stream={s} />
         ))}

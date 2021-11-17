@@ -23,10 +23,10 @@ export const useRoutes = () => {
       <Route path="/users" exact>
         <Users />
       </Route>
-      <Route path="/group" exact>
+      <Route path="/streams" exact>
         <Streams />
       </Route>
-      <Route path="/stream:id">
+      <Route path="/streams:id">
         <StreamContainer />
       </Route>
       <Route path="/home" exact>
